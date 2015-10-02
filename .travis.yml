@@ -1,1 +1,5 @@
 language: crystal
+sudo: false
+script:
+    - crystal build bin/crdoc.cr && ./crdoc --help
+    - crystal spec

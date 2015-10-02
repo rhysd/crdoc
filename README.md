@@ -1,5 +1,6 @@
 crdoc
 =======
+[![Build Status](https://travis-ci.org/rhysd/crdoc.svg)](https://travis-ci.org/rhysd/crdoc)
 
 `crdoc` is a CLI tool to search and open documentation for [Crystal language](https://github.com/manastech/crystal).
 
