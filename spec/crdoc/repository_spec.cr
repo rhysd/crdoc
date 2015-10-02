@@ -1,20 +1,20 @@
 require "../spec_helper"
 
 describe Crdoc::Repository do
-  R = Crdoc::Repository::REPO_PATH
+  r = Crdoc::Repository::REPO_PATH
 
   describe "exists?" do
     it "returns if repository exists or not" do
-      system("mv #{R} #{R}-tmp") if Dir.exists?(R)
+      system("mv #{r} #{r}-tmp") if Dir.exists?(r)
 
       begin
         Crdoc::Repository.exists?.should be_false
 
-        Dir.mkdir_p R
+        Dir.mkdir_p r
         Crdoc::Repository.exists?.should be_true
       ensure
-        Dir.rmdir R
-        system("mv #{R}-tmp #{R}") if Dir.exists?("#{R}-tmp")
+        Dir.rmdir r
+        system("mv #{r}-tmp #{r}") if Dir.exists?("#{r}-tmp")
       end
     end
   end
@@ -25,8 +25,8 @@ describe Crdoc::Repository do
 
       Crdoc::Repository.init
       Crdoc::Repository.exists?.should be_true
-      Dir.exists?("#{R}/api").should be_true
-      Dir.exists?("#{R}/api").should be_true
+      Dir.exists?("#{r}/api").should be_true
+      Dir.exists?("#{r}/api").should be_true
     end
   end
 
