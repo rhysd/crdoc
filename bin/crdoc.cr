@@ -1,3 +1,3 @@
 require "../src/crdoc"
 
-puts "Hello, world."
+Crdoc::App.run
