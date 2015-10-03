@@ -12,7 +12,7 @@ Please download a binary from [release page](https://github.com/rhysd/crdoc/rele
 $ cd /your/favorite/directory/
 $ git clone https://github.com/rhysd/crdoc.git && cd crdoc
 $ git submodule update
-$ crystal build --release crdoc.cr
+$ crystal build --release bin/crdoc.cr
 $ cp crdoc /your/favorite/bin
 ```
 
