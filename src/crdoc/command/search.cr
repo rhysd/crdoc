@@ -12,6 +12,21 @@ class Crdoc::Command::Search
     end
   end
 
+  def ask(candidates)
+    puts "Multiple candidates are found.\n\n"
+    candidates.each_with_index do |c, i|
+      puts "  [#{i}] #{c}"
+    end
+    print "\nNumber: "
+    STDOUT.flush
+    input = gets
+    if input
+      candidates[input.to_i]? rescue nil
+    else
+      nil
+    end
+  end
+
   def run(args)
     feeling_lucky = false
 
@@ -32,21 +47,29 @@ class Crdoc::Command::Search
       return false
     end
 
-    l = @docs.list(@kind).select do |c|
+    ls = @docs.list(@kind).select do |c|
       args.all? do |a|
         c.includes? a
       end
     end
 
-    if l.empty?
+    if ls.empty?
       puts "No result for #{args}"
       return true
     end
 
     if feeling_lucky
-      puts l.first
+      puts ls.min_by &.size
+      true
     else
-      puts l.first
+      selected = ask(ls)
+      if selected
+        puts selected
+        true
+      else
+        STDERR.puts "Invalid input."
+        false
+      end
     end
   end
 end
