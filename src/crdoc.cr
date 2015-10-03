@@ -12,11 +12,14 @@ Command:
     update                      update cache
 USAGE
 
+  CONFIG_PATH = "#{ENV["HOME"]}/.config/crdoc"
+
   def self.run(opts = ARGV)
     new(opts).run
   end
 
   def initialize(@options)
+    @repo = Repository.new CONFIG_PATH
   end
 
   def usage
@@ -32,6 +35,9 @@ USAGE
     command = @options.first?
     if command
       @options.shift
+
+      @repo.init
+
       case
       when "search".starts_with? command
         not_implemented
@@ -40,6 +46,7 @@ USAGE
       when "list".starts_with? command
         not_implemented
       when "update".starts_with? command
+        @repo.update
         not_implemented
       when "syntax_and_semantics".starts_with? command
         not_implemented

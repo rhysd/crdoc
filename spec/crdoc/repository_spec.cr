@@ -1,41 +1,42 @@
 require "../spec_helper"
 
 describe Crdoc::Repository do
-  r = Crdoc::Repository::REPO_PATH
 
   describe "exists?" do
     it "returns if repository exists or not" do
-      system("mv #{r} #{r}-tmp") if Dir.exists?(r)
+      r = Crdoc::Repository.new "#{ENV["HOME"]}/.config/crdoc"
+      system("mv #{r.path} #{r.path}-tmp") if Dir.exists?(r.path)
 
       begin
-        Crdoc::Repository.exists?.should be_false
+        r.exists?.should be_false
 
-        Dir.mkdir_p r
-        Crdoc::Repository.exists?.should be_true
+        Dir.mkdir_p r.path
+        r.exists?.should be_true
       ensure
-        Dir.rmdir r
-        system("mv #{r}-tmp #{r}") if Dir.exists?("#{r}-tmp")
+        Dir.rmdir r.path
+        system("mv #{r.path}-tmp #{r.path}") if Dir.exists?("#{r.path}-tmp")
       end
     end
   end
 
   describe "init" do
     it "clones crystal gh-page git repository if it doesn't exist" do
-      break if Crdoc::Repository.exists?
+      r = Crdoc::Repository.new "#{ENV["HOME"]}/.config/crdoc"
 
-      Crdoc::Repository.init
-      Crdoc::Repository.exists?.should be_true
-      Dir.exists?("#{r}/api").should be_true
-      Dir.exists?("#{r}/api").should be_true
+      r.init
+      r.exists?.should be_true
+      Dir.exists?("#{r.path}/api").should be_true
+      Dir.exists?("#{r.path}/docs").should be_true
     end
   end
 
   describe "update" do
     it "updates crystal gh-page repository" do
-      if Crdoc::Repository.exists?
-        Crdoc::Repository.update.should be_true
+      r = Crdoc::Repository.new "#{ENV["HOME"]}/.config/crdoc"
+      if r.exists?
+        r.update.should be_true
       else
-        Crdoc::Repository.update.should be_false
+        r.update.should be_false
       end
     end
   end

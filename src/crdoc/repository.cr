@@ -1,25 +1,26 @@
-module Crdoc::Repository extend self
-  CONFIG_PATH = "#{ENV["HOME"]}/.config/crdoc"
-  REPO_PATH = "#{CONFIG_PATH}/crystal"
+class Crdoc::Repository
+  def initialize(@config_path)
+    @repo_path = "#{@config_path}/crystal"
+  end
 
   def exists?
-    Dir.exists? REPO_PATH
+    Dir.exists? @repo_path
   end
 
   def update
     return false unless exists?
-    Dir.chdir REPO_PATH do
+    Dir.chdir @repo_path do
       system "git pull"
     end
   end
 
   def path
-    REPO_PATH
+    @repo_path
   end
 
   def init
-    Dir.mkdir_p CONFIG_PATH unless Dir.exists?(CONFIG_PATH)
-    Dir.chdir CONFIG_PATH do
+    Dir.mkdir_p @config_path unless Dir.exists?(@config_path)
+    Dir.chdir @config_path do
       system "git clone -b gh-pages --single-branch https://github.com/manastech/crystal.git"
     end unless exists?
   end
