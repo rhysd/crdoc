@@ -1,4 +1,5 @@
 require "./crdoc/*"
+require "./crdoc/command/*"
 
 class Crdoc::App
   USAGE = <<-USAGE
@@ -45,8 +46,7 @@ USAGE
       when "api".starts_with? command
         not_implemented
       when "list".starts_with? command
-        puts docs.list
-        not_implemented
+        Command::List.new(docs).run(@options)
       when "update".starts_with? command
         repo.update
         not_implemented
