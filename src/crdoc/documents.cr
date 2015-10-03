@@ -24,7 +24,11 @@ class Crdoc::Documents
     File.exists? @cache_file
   end
 
-  def load_cache
+  def delete_cache
+    File.delete @cache_file if cached?
+  end
+
+  private def load_cache
     begin
       File.open(@cache_file) do |f|
         Cache.from_json(f.read).to_hash
@@ -77,24 +81,22 @@ class Crdoc::Documents
     cache
   end
 
-  def list(kind = nil: String?)
+  def list(kind = nil: Symbol?)
     c = cache
     if kind
       c[kind].map{|k, _| k}
     else
       s = c.inject(0){|i, _, v| i + v.size}
       c.inject(Array(String).new s) do |acc, _, v|
-        puts v.map{|k, _| k}
         acc + v.map{|k, _| k}
       end
     end
   end
 
-  def list_paths(kind = nil: String?)
+  def list_paths(kind = nil: Symbol?)
   end
 
   # Currently returns only first candidate
-  def search(kind = nil: String?)
-    c = cache
+  def search(kind = nil: Symbol?)
   end
 end
