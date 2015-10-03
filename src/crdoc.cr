@@ -19,10 +19,14 @@ USAGE
   def initialize(@options)
   end
 
+  def usage
+    puts USAGE
+    true
+  end
+
   def run
-    unless @options.includes? "--help"
-      puts USAGE
-      return
+    if @options.includes? "--help"
+      return usage
     end
 
     command = @options.first?
@@ -39,15 +43,16 @@ USAGE
         not_implemented
       when "syntax_and_semantics".starts_with? command
         not_implemented
+      else
+        usage
       end
     else
-      puts USAGE
+      usage
     end
-    nil
   end
 
   def not_implemented
     STDERR.puts "Sorry, this command is not implemented yet."
-    nil
+    false
   end
 end
