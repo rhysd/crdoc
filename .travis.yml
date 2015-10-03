@@ -1,5 +1,6 @@
 language: crystal
 sudo: false
+install: crystal dep
 script:
     - crystal build bin/crdoc.cr && ./crdoc --help
     - crystal spec

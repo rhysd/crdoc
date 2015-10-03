@@ -9,6 +9,7 @@ crdoc
 ```sh
 $ cd /your/favorite/directory/
 $ git clone https://github.com/rhysd/crdoc.git && cd crdoc
+$ crystal dep
 $ crystal build crdoc.cr
 $ cp crdoc /your/favorite/bin
 ```
