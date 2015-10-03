@@ -10,19 +10,25 @@ crdoc
 $ cd /your/favorite/directory/
 $ git clone https://github.com/rhysd/crdoc.git && cd crdoc
 $ crystal dep
-$ crystal build crdoc.cr
+$ crystal build --release crdoc.cr
 $ cp crdoc /your/favorite/bin
 ```
 
 ## Usage
 
 ```
-crdoc search KEYWORD...
-crdoc api KEYWORD...
-crdoc syntax_and_semantics KEYWORD...
-crdoc list
+crdoc search [-f] KEYWORD...
+crdoc api [-f] KEYWORD...
+crdoc syntax_and_semantics [-f] KEYWORD...
+crdoc list [-p|--path] [-a|--api] [-s|--syntax-and-semantics]
 crdoc update
 ```
+
+- `search` searches all documents with keyword(s) and show the result in browser.
+- `api` searches API document with keyword(s) and show the result in browser.
+- `syntax_and_semantics` searches 'syntax and semantics' document with keyword(s) and show the result in browser.
+- `list` shows list of candidates.  When `--path` is specified, it shows full paths to HTML documents instead.
+- `update` updates cached repository.
 
 ## Using with [Peco](https://github.com/peco/peco)/[Percol](https://github.com/mooz/percol)
 

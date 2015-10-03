@@ -4,3 +4,4 @@ install: crystal dep
 script:
     - crystal build bin/crdoc.cr && ./crdoc --help
     - crystal spec
+    - crystal build --release bin/crdoc.cr && ./crdoc --help
