@@ -15,11 +15,16 @@ class Crdoc::Command::Search
   def run(args)
     feeling_lucky = false
 
-    OptionParser.parse(args) do |parser|
-      parser.banner = "crdoc #{kind} keywords..."
-      parser.on("-f", "--feeling-lucky", "Open firstly found candidate") do
-        feeling_lucky = true
+    begin
+      OptionParser.parse(args) do |parser|
+        parser.banner = "crdoc #{kind} keywords..."
+        parser.on("-f", "--feeling-lucky", "Open firstly found candidate") do
+          feeling_lucky = true
+        end
       end
+    rescue e
+      STDERR.puts e
+      return false
     end
 
     if args.empty?
