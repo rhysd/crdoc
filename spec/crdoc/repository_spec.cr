@@ -4,7 +4,7 @@ describe Crdoc::Repository do
 
   describe "exists?" do
     it "returns if repository exists or not" do
-      r = Crdoc::Repository.new "#{ENV["HOME"]}/.config/crdoc"
+      r = Crdoc::Repository.new TEST_CONFIG_PATH
       system("mv #{r.path} #{r.path}-tmp") if Dir.exists?(r.path)
 
       begin
@@ -21,7 +21,7 @@ describe Crdoc::Repository do
 
   describe "init" do
     it "clones crystal gh-page git repository if it doesn't exist" do
-      r = Crdoc::Repository.new "#{ENV["HOME"]}/.config/crdoc"
+      r = Crdoc::Repository.new TEST_CONFIG_PATH
 
       r.init
       r.exists?.should be_true
@@ -32,7 +32,7 @@ describe Crdoc::Repository do
 
   describe "update" do
     it "updates crystal gh-page repository" do
-      r = Crdoc::Repository.new "#{ENV["HOME"]}/.config/crdoc"
+      r = Crdoc::Repository.new TEST_CONFIG_PATH
       if r.exists?
         r.update.should be_true
       else

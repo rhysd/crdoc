@@ -1,8 +1,8 @@
 require "../spec_helper"
 
 describe Crdoc::Documents do
-  r = Crdoc::Repository.new "#{__DIR__}/test_config"
-  d = Crdoc::Documents.new("#{__DIR__}/test_config", r)
+  r = Crdoc::Repository.new TEST_CONFIG_PATH
+  d = Crdoc::Documents.new(TEST_CONFIG_PATH, r)
 
   describe "cache!" do
     it "make a cache" do
