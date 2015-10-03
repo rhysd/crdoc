@@ -82,4 +82,20 @@ describe Crdoc::Documents do
       l.all?(&.ends_with? ".html").should be_true
     end
   end
+
+  describe "candidates" do
+    it "returns kind-specific candidates if kind is specified" do
+      d.cache! unless d.cached?
+      c = d.candidates :api
+      c.empty?.should be_false
+      c = d.candidates :syntax_and_semantics
+      c.empty?.should be_false
+    end
+
+    it "returns all candidates if nothing is specified" do
+      d.cache! unless d.cached?
+      d.candidates.empty?.should be_false
+    end
+  end
+
 end

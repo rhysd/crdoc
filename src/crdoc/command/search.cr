@@ -1,10 +1,11 @@
 require "option_parser"
+require "../../../.deps/rhysd-open.cr/src/external/open" # Ah...
 
 class Crdoc::Command::Search
   def initialize(@docs, @kind = nil)
   end
 
-  def kind
+  private def kind
     if @kind
       @kind.to_s
     else
@@ -12,7 +13,7 @@ class Crdoc::Command::Search
     end
   end
 
-  def ask(candidates)
+  private def ask(candidates)
     puts "Multiple candidates are found.\n\n"
     candidates.each_with_index do |c, i|
       puts "  [#{i}] #{c}"
@@ -24,6 +25,13 @@ class Crdoc::Command::Search
       candidates[input.to_i]? rescue nil
     else
       nil
+    end
+  end
+
+  private def open(name)
+    html = @docs.candidates(@kind)[name]?
+    if html
+      External.open html
     end
   end
 
@@ -59,13 +67,11 @@ class Crdoc::Command::Search
     end
 
     if feeling_lucky
-      puts ls.min_by &.size
-      true
+      open ls.min_by(&.size)
     else
       selected = ask(ls)
       if selected
-        puts selected
-        true
+        open selected
       else
         STDERR.puts "Invalid input."
         false

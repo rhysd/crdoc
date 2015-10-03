@@ -81,6 +81,16 @@ class Crdoc::Documents
     cache
   end
 
+  def candidates(kind = nil)
+    if kind
+      cache[kind]
+    else
+      cache.inject({} of String => String) do |acc, _, v|
+        acc.merge! v
+      end
+    end
+  end
+
   def list(kind = nil: Symbol?)
     c = cache
     if kind
