@@ -67,8 +67,8 @@ class Crdoc::Documents
     api_path = "#{@repo.path}/api/"
     syntax_and_semantics_path = "#{@repo.path}/docs/syntax_and_semantics/"
 
-    api = Dir["#{api_path}**/*.html"]
-    syntax_and_semantics = Dir["#{syntax_and_semantics_path}**/*.html"]
+    api = Dir["#{api_path}**/*.html", "#{api_path}*.html"]
+    syntax_and_semantics = Dir["#{syntax_and_semantics_path}**/*.html", "#{syntax_and_semantics_path}*.html"]
 
     cache = {
       api: paths_to_cache(api, api_path.size)
