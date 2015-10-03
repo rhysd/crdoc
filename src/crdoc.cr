@@ -42,16 +42,16 @@ USAGE
 
       case
       when "search".starts_with? command
-        not_implemented
+        Command::List.new(docs).run(@options)
       when "api".starts_with? command
-        not_implemented
+        Command::List.new(docs, :api).run(@options)
       when "list".starts_with? command
         Command::List.new(docs).run(@options)
       when "update".starts_with? command
         repo.update
-        not_implemented
+        docs.cache!
       when "syntax_and_semantics".starts_with? command
-        not_implemented
+        Command::List.new(docs, :syntax_and_semantics).run(@options)
       else
         usage
       end
