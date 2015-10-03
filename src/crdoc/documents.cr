@@ -94,6 +94,15 @@ class Crdoc::Documents
   end
 
   def list_paths(kind = nil: Symbol?)
+    c = cache
+    if kind
+      c[kind].map{|_, v| v}
+    else
+      s = c.inject(0){|i, _, v| i + v.size}
+      c.inject(Array(String).new s) do |acc, _, v|
+        acc + v.map{|_, v| v}
+      end
+    end
   end
 
   # Currently returns only first candidate

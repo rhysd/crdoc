@@ -6,19 +6,26 @@ class Crdoc::Command::List
 
   def run(args)
     kind = nil
+    show_path = false
 
     OptionParser.parse(args) do |parser|
       parser.banner = "crdoc list"
-      parser.on("-a", "--api", "lists all API candidates") do
+      parser.on("-a", "--api", "Lists all API candidates") do
         kind = :api
       end
-      parser.on("-s", "--syntax-and-semantics", "lists all language spec candiadtes") do
+      parser.on("-s", "--syntax-and-semantics", "Lists all language spec candiadtes") do
         kind = :syntax_and_semantics
+      end
+      parser.on("-p", "--path", "Lists full path to the HTML document instead of canidates") do
+        show_path = true
       end
     end
 
-    l = @docs.list kind
-    l.each{|c| puts c}
+    if show_path
+      @docs.list_paths(kind).each{|c| puts c}
+    else
+      @docs.list(kind).each{|c| puts c}
+    end
     true
   end
 end

@@ -65,9 +65,21 @@ describe Crdoc::Documents do
     it "returns list of all candidates if nothing specified" do
       la = d.list :api
       lss = d.list :syntax_and_semantics
-      ll = d.list
+      l = d.list
 
-      ll.size.should eq(la.size + lss.size)
+      l.size.should eq(la.size + lss.size)
+    end
+  end
+
+  describe "list_paths" do
+    it "returns list of path to HTML document instead of candidates" do
+      la = d.list_paths :api
+      lss = d.list_paths :syntax_and_semantics
+      l = d.list_paths
+
+      la.all?(&.ends_with? ".html").should be_true
+      lss.all?(&.ends_with? ".html").should be_true
+      l.all?(&.ends_with? ".html").should be_true
     end
   end
 end
