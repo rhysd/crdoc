@@ -1,6 +1,6 @@
 require "option_parser"
 
-class Crdoc::Command::List
+class Crdoc::Command::Search
   def initialize(@docs, @kind = nil)
   end
 

@@ -42,16 +42,18 @@ USAGE
 
       case
       when "search".starts_with? command
-        Command::List.new(docs).run(@options)
+        Command::Search.new(docs).run(@options)
       when "api".starts_with? command
-        Command::List.new(docs, :api).run(@options)
+        Command::Search.new(docs, :api).run(@options)
+      when "syntax_and_semantics".starts_with? command
+        Command::Search.new(docs, :syntax_and_semantics).run(@options)
       when "list".starts_with? command
         Command::List.new(docs).run(@options)
       when "update".starts_with? command
+        puts "Updating repository..."
         repo.update
+        puts "Updating cache..."
         docs.cache!
-      when "syntax_and_semantics".starts_with? command
-        Command::List.new(docs, :syntax_and_semantics).run(@options)
       else
         usage
       end
