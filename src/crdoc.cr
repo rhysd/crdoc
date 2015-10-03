@@ -19,7 +19,6 @@ USAGE
   end
 
   def initialize(@options)
-    @repo = Repository.new CONFIG_PATH
   end
 
   def usage
@@ -36,7 +35,9 @@ USAGE
     if command
       @options.shift
 
-      @repo.init
+      repo = Repository.new CONFIG_PATH
+      repo.init
+      docs = Documents.new(CONFIG_PATH, repo)
 
       case
       when "search".starts_with? command
@@ -44,9 +45,10 @@ USAGE
       when "api".starts_with? command
         not_implemented
       when "list".starts_with? command
+        puts docs.list
         not_implemented
       when "update".starts_with? command
-        @repo.update
+        repo.update
         not_implemented
       when "syntax_and_semantics".starts_with? command
         not_implemented
