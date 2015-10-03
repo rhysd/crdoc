@@ -1,5 +1,5 @@
 require "option_parser"
-require "../../../.deps/rhysd-open.cr/src/external/open" # Ah...
+require "../../../vendor/open.cr/src/external/open"
 
 class Crdoc::Command::Search
   def initialize(@docs, @kind = nil)

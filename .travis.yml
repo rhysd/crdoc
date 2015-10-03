@@ -1,6 +1,6 @@
 language: crystal
 sudo: false
-install: crystal deps
+install: git submodule update
 script:
     - crystal build bin/crdoc.cr && ./crdoc --help
     - crystal spec

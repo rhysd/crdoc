@@ -1,0 +1,3 @@
+[submodule "vendor/open.cr"]
+	path = vendor/open.cr
+	url = https://github.com/rhysd/open.cr.git
