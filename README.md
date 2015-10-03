@@ -6,6 +6,8 @@ crdoc
 
 ## Installation
 
+Please download a binary from [release page](https://github.com/rhysd/crdoc/releases) (OS X only) or build
+
 ```sh
 $ cd /your/favorite/directory/
 $ git clone https://github.com/rhysd/crdoc.git && cd crdoc
