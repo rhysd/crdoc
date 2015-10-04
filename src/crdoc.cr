@@ -11,6 +11,9 @@ Command:
     syntax_and_semantics        search 'Syntax and Semantics' documents
     list                        show list of all documents
     update                      update cache
+
+Repository:
+    https://github.com/rhysd/crdoc
 USAGE
 
   CONFIG_PATH = "#{ENV["HOME"]}/.config/crdoc"
