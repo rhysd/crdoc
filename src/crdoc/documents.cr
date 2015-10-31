@@ -3,7 +3,7 @@ require "json"
 
 class Crdoc::Documents
   class Cache
-    json_mapping({
+    JSON.mapping({
       api: {type: Hash(String, String), nilable: false},
       syntax_and_semantics: {type: Hash(String, String), nilable: false},
     })
@@ -16,7 +16,7 @@ class Crdoc::Documents
     end
   end
 
-  def initialize(@config_path, @repo: Crdoc::Repository)
+  def initialize(@config_path, @repo : Crdoc::Repository)
     @cache_file = "#{@config_path}/cache"
   end
 
@@ -30,9 +30,7 @@ class Crdoc::Documents
 
   private def load_cache
     begin
-      File.open(@cache_file) do |f|
-        Cache.from_json(f.read).to_hash
-      end
+      Cache.from_json(File.read(@cache_file)).to_hash
     rescue e
       puts "ERROR!"
       puts e
@@ -71,8 +69,8 @@ class Crdoc::Documents
     syntax_and_semantics = Dir["#{syntax_and_semantics_path}**/*.html", "#{syntax_and_semantics_path}*.html"]
 
     cache = {
-      api: paths_to_cache(api, api_path.size)
-      syntax_and_semantics: paths_to_cache(syntax_and_semantics, syntax_and_semantics_path.size)
+      api: paths_to_cache(api, api_path.size),
+      syntax_and_semantics: paths_to_cache(syntax_and_semantics, syntax_and_semantics_path.size),
     }
 
     File.open(@cache_file, mode = "w") do |f|

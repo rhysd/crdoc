@@ -9,7 +9,7 @@ class Crdoc::Repository
 
   def update
     return false unless exists?
-    Dir.chdir @repo_path do
+    Dir.cd @repo_path do
       system "git pull"
     end
   end
@@ -20,7 +20,7 @@ class Crdoc::Repository
 
   def init
     Dir.mkdir_p @config_path unless Dir.exists?(@config_path)
-    Dir.chdir @config_path do
+    Dir.cd @config_path do
       system "git clone -b gh-pages --single-branch https://github.com/manastech/crystal.git"
     end unless exists?
   end
