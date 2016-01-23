@@ -83,7 +83,7 @@ class Crdoc::Documents
     if kind
       cache[kind]
     else
-      cache.inject({} of String => String) do |acc, _, v|
+      cache.reduce({} of String => String) do |acc, _, v|
         acc.merge! v
       end
     end
@@ -94,8 +94,8 @@ class Crdoc::Documents
     if kind
       c[kind].map{|k, _| k}
     else
-      s = c.inject(0){|i, _, v| i + v.size}
-      c.inject(Array(String).new s) do |acc, _, v|
+      s = c.reduce(0){|i, _, v| i + v.size}
+      c.reduce(Array(String).new s) do |acc, _, v|
         acc + v.map{|k, _| k}
       end
     end
@@ -106,8 +106,8 @@ class Crdoc::Documents
     if kind
       c[kind].map{|_, v| v}
     else
-      s = c.inject(0){|i, _, v| i + v.size}
-      c.inject(Array(String).new s) do |acc, _, v|
+      s = c.reduce(0){|i, _, v| i + v.size}
+      c.reduce(Array(String).new s) do |acc, _, v|
         acc + v.map{|_, v| v}
       end
     end
